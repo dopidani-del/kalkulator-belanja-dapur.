@@ -44,4 +44,15 @@ function download(name,data,type){let u=URL.createObjectURL(new Blob([data],{typ
 $('export').onclick=()=>download('riwayat-belanja.txt',s.transactions.map(receipt).join('\n\n----------------\n\n')||'Belum ada transaksi.','text/plain;charset=utf-8');$('backup').onclick=()=>download('cadangan-belanja-dapur.json',JSON.stringify(s,null,2),'application/json');
 $('restore').onchange=async e=>{try{let x=JSON.parse(await e.target.files[0].text());if(!x.categories||!x.transactions||!x.incomes)throw 0;if(confirm('Pulihkan cadangan dan ganti data sekarang?')){s={...defaults,...x};persist();alert('Cadangan dipulihkan.')}}catch(err){alert('File cadangan tidak valid.')}e.target.value=''};
 $('reset').onclick=()=>{if(confirm('Hapus semua data aplikasi? Tindakan ini tidak dapat dibatalkan.')){s={...defaults,settings:{...defaults.settings}};persist();alert('Data dihapus.')}};render();
-</script></body></html>
+</script>
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js")
+      .catch((error) => {
+        console.error("Service worker gagal:", error);
+      });
+  });
+}
+</script>
+</body></html>
