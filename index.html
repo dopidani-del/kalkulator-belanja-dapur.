@@ -1,94 +1,46 @@
 <!doctype html>
-<html lang="id">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#166534">
-<meta name="description" content="Kalkulator Belanja Dapur sederhana">
-<link rel="manifest" href="manifest.json">
-<title>Kalkulator Belanja Dapur</title>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#166534"><title>Kalkulator Belanja Dapur</title>
 <style>
-:root{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#17211b;background:#f3f7f3}
-*{box-sizing:border-box}body{margin:0}.app{max-width:720px;margin:auto;padding:18px}
-header{background:#166534;color:white;padding:22px;border-radius:18px;margin-bottom:16px}
-h1{font-size:1.45rem;margin:0 0 6px}header p{margin:0;opacity:.9}
-.panel{background:white;border-radius:16px;padding:16px;margin:12px 0;box-shadow:0 3px 14px #16351b12}
-label{display:block;font-size:.9rem;font-weight:650;margin:10px 0 5px}
-input{width:100%;padding:12px;border:1px solid #cbd5ce;border-radius:10px;font:inherit;background:#fff}
-.row{display:grid;grid-template-columns:1.5fr .8fr 1fr;gap:8px}
-button{border:0;border-radius:10px;padding:12px 14px;font:inherit;font-weight:700;cursor:pointer}
-.primary{background:#166534;color:white;width:100%;margin-top:12px}.secondary{background:#e4efe6;color:#14532d}
-.item{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:12px 0;border-bottom:1px solid #edf1ed}
-.item:last-child{border-bottom:0}.item small{display:block;color:#617067;margin-top:3px}
-.item button{padding:7px 10px;background:#fee2e2;color:#991b1b}
-.total{font-size:1.55rem;font-weight:800;color:#166534}
-.actions{display:flex;gap:8px;flex-wrap:wrap}.actions button{flex:1}
-.muted{color:#617067;font-size:.9rem}.empty{text-align:center;padding:18px;color:#617067}
-@media(max-width:430px){.row{grid-template-columns:1fr 1fr}.row>div:first-child{grid-column:1/-1}}
-</style>
-</head>
-<body>
-<div class="app">
-<header><h1>🛒 Kalkulator Belanja Dapur</h1><p>Catat barang, hitung total, dan bagikan struk.</p></header>
-<section class="panel">
-<h2 style="margin-top:0">Tambah barang</h2>
-<div class="row">
-<div><label for="name">Nama barang</label><input id="name" placeholder="Contoh: Beras"></div>
-<div><label for="qty">Jumlah</label><input id="qty" type="number" min="0.01" step="any" value="1"></div>
-<div><label for="price">Harga satuan (Rp)</label><input id="price" type="number" min="0" step="100" placeholder="15000"></div>
-</div>
-<button class="primary" id="add">+ Tambah ke daftar</button>
-<p class="muted">Masukkan harga satuan dalam rupiah. Jumlah boleh berupa desimal, misalnya 0,5 kg.</p>
-</section>
-<section class="panel">
-<h2 style="margin-top:0">Daftar belanja</h2>
-<div id="items" class="empty">Belum ada barang. Tambahkan barang pertama.</div>
-</section>
-<section class="panel">
-<div class="muted">TOTAL BELANJA</div><div class="total" id="total">Rp0</div>
-<label for="paid">Uang dibayarkan (opsional)</label><input id="paid" type="number" min="0" step="1000" placeholder="Contoh: 100000">
-<p>Uang kembali: <strong id="change">Rp0</strong></p>
-<div class="actions"><button class="secondary" id="share">Bagikan struk</button><button class="secondary" id="clear">Kosongkan daftar</button></div>
-</section>
-<p class="muted" style="text-align:center">Kalkulator Belanja Dapur • Data disimpan di perangkat ini selama halaman tidak dibersihkan.</p>
-</div>
+:root{font-family:system-ui,sans-serif;color:#17211b;background:#f3f7f3;--g:#166534}*{box-sizing:border-box}body{margin:0}.app{max-width:760px;margin:auto;padding:14px}header{background:linear-gradient(135deg,#166534,#27834a);color:white;padding:20px;border-radius:18px}h1{font-size:1.35rem;margin:0 0 5px}header p{margin:0}nav{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin:12px 0}button{border:0;border-radius:10px;padding:10px;font:inherit;font-weight:650;cursor:pointer;background:#e4efe6;color:#14532d}nav button{font-size:.78rem;padding:10px 4px}nav button.active,.primary{background:var(--g);color:white}.panel{background:white;border-radius:15px;padding:15px;margin:12px 0;box-shadow:0 3px 14px #16351b0d}h2{font-size:1.08rem;margin:0 0 12px}label{display:block;font-size:.86rem;font-weight:650;margin:9px 0 5px}input,select{width:100%;padding:11px;border:1px solid #cbd5ce;border-radius:10px;font:inherit;background:white}.g2{display:grid;grid-template-columns:1fr 1fr;gap:9px}.g3{display:grid;grid-template-columns:1.3fr .7fr 1fr;gap:8px}.primary{width:100%;margin-top:12px}.danger{background:#fee2e2;color:#991b1b}.small{font-size:.8rem;padding:7px}.item{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;padding:11px 0;border-bottom:1px solid #edf1ed}.item:last-child{border:0}.item small{display:block;color:#617067;margin-top:3px}.empty,.muted{color:#617067;font-size:.86rem}.empty{text-align:center;padding:15px}.stats{display:grid;grid-template-columns:1fr 1fr;gap:9px}.stat{background:#eff7f0;padding:12px;border-radius:12px}.stat span{display:block;font-size:.8rem;color:#617067}.stat strong{display:block;margin-top:4px;overflow-wrap:anywhere}.total{font-size:1.4rem;font-weight:800;color:var(--g)}.actions{display:flex;gap:7px;flex-wrap:wrap}.actions button{flex:1}.hidden{display:none!important}.notice{background:#fff8df;padding:10px;border-radius:10px;font-size:.85rem}@media(max-width:430px){nav{grid-template-columns:repeat(3,1fr)}.g3{grid-template-columns:1fr 1fr}.g3>div:first-child{grid-column:1/-1}}
+</style></head><body><div class="app">
+<header><h1>🛒 Kalkulator Belanja Dapur</h1><p>Belanja, uang masuk, anggaran, saldo, dan riwayat.</p></header>
+<nav><button class="active" data-p="home">🏠 Beranda</button><button data-p="belanja">🛒 Belanja</button><button data-p="kategori">🏷️ Kategori</button><button data-p="harga">📋 Daftar Harga</button><button data-p="riwayat">🧾 Riwayat</button><button data-p="anggaran">🎯 Anggaran</button><button data-p="uang">💵 Uang Masuk</button><button data-p="pengaturan">⚙️ Pengaturan</button></nav>
+<section id="p-home" class="page"><div class="panel"><h2>Dashboard / Beranda</h2><p id="welcome" class="muted"></p><div class="stats"><div class="stat"><span>Sisa uang / saldo</span><strong id="saldo">Rp0</strong></div><div class="stat"><span>Total belanja</span><strong id="spent">Rp0</strong></div><div class="stat"><span>Sisa anggaran</span><strong id="left">Belum diatur</strong></div><div class="stat"><span>Jumlah transaksi</span><strong id="count">0</strong></div></div></div><div class="panel"><h2>Transaksi terbaru</h2><div id="recent" class="empty">Belum ada transaksi.</div></div></section>
+<section id="p-belanja" class="page hidden"><div class="panel"><h2>Tambah barang</h2><div class="g2"><div><label>Nama barang</label><input id="bn" placeholder="Contoh: Beras"></div><div><label>Kategori</label><select id="bc"></select></div></div><div class="g3"><div><label>Jumlah</label><input id="bq" type="number" min=".01" step="any" value="1"></div><div><label>Satuan</label><select id="bu"><option>kg</option><option>gram</option><option>ons</option><option>liter</option><option>ml</option><option>buah</option><option>butir</option><option>ikat</option><option>bungkus</option><option>pack</option><option>botol</option><option>kaleng</option><option>karung</option><option>porsi</option><option>pcs</option><option>lembar</option><option>lainnya</option></select></div><div><label>Harga per satuan (Rp)</label><input id="bp" type="number" min="0" placeholder="15000"></div></div><button id="add" class="primary">+ Tambah ke daftar</button><p class="muted">Contoh: 2 kg beras dengan harga Rp15.000/kg.</p></div><div class="panel"><h2>Daftar belanja sementara</h2><div id="cart" class="empty">Belum ada barang.</div><div class="item"><strong>Total belanja</strong><strong id="ctotal" class="total">Rp0</strong></div><div class="g2"><div><label>Nama petugas</label><input id="staff" placeholder="Nama petugas"></div><div><label>Uang dibayarkan (opsional)</label><input id="paid" type="number" min="0" placeholder="100000"></div></div><p>Perkiraan kembalian: <strong id="change">Rp0</strong></p><div class="actions"><button id="saveTx" class="primary">Simpan transaksi</button><button id="shareCart">Bagikan ke WhatsApp</button></div><p class="muted">Transaksi tersimpan akan mengurangi saldo. Simpan catatan uang masuk dahulu.</p></div></section>
+<section id="p-kategori" class="page hidden"><div class="panel"><h2>Kategori Barang</h2><label>Nama kategori baru</label><input id="newcat" placeholder="Misalnya: Bahan kering"><button id="addcat" class="primary">Tambah kategori</button><div id="cats"></div></div></section>
+<section id="p-harga" class="page hidden"><div class="panel"><h2>Daftar Harga Barang</h2><div class="g2"><div><label>Nama barang</label><input id="pn" placeholder="Telur ayam"></div><div><label>Kategori</label><select id="pc"></select></div></div><div class="g2"><div><label>Satuan</label><select id="pu"><option>kg</option><option>gram</option><option>liter</option><option>ml</option><option>buah</option><option>butir</option><option>ikat</option><option>bungkus</option><option>pack</option><option>botol</option><option>pcs</option><option>lainnya</option></select></div><div><label>Harga satuan (Rp)</label><input id="pp" type="number" min="0"></div></div><button id="savePrice" class="primary">Simpan harga</button><div id="prices"></div></div></section>
+<section id="p-riwayat" class="page hidden"><div class="panel"><h2>Riwayat Belanja</h2><div id="history" class="empty">Belum ada transaksi.</div><button id="export" style="width:100%;margin-top:10px">Unduh riwayat TXT</button></div></section>
+<section id="p-anggaran" class="page hidden"><div class="panel"><h2>Anggaran Belanja</h2><label>Batas anggaran (Rp)</label><input id="budget" type="number" min="0" placeholder="1000000"><button id="saveBudget" class="primary">Simpan anggaran</button><p>Anggaran: <strong id="btotal">Belum diatur</strong></p><p>Terpakai: <strong id="bused">Rp0</strong></p><p>Sisa: <strong id="bleft">—</strong></p><p id="bnote" class="muted"></p></div></section>
+<section id="p-uang" class="page hidden"><div class="panel"><h2>Uang Masuk</h2><label>Keterangan</label><input id="idesc" placeholder="Uang belanja mingguan"><div class="g2"><div><label>Jumlah uang masuk (Rp)</label><input id="iamt" type="number" min="1" placeholder="500000"></div><div><label>Tanggal</label><input id="idate" type="date"></div></div><button id="addIncome" class="primary">Simpan uang masuk</button><div id="incomes"></div></div></section>
+<section id="p-pengaturan" class="page hidden"><div class="panel"><h2>Pengaturan Aplikasi</h2><label>Nama dapur / unit</label><input id="shop" placeholder="Dapur Utama"><label>Nama petugas default</label><input id="defaultStaff" placeholder="Nama petugas"><button id="settingsSave" class="primary">Simpan pengaturan</button><p class="notice">Data disimpan di browser HP ini. Unduh cadangan berkala; data tidak otomatis tersinkron ke perangkat lain.</p><button id="backup" style="width:100%;margin-top:10px">Cadangkan data JSON</button><label>Pulihkan cadangan JSON</label><input id="restore" type="file" accept=".json,application/json"><button id="reset" class="danger" style="width:100%;margin-top:12px">Hapus semua data</button></div></section>
+<p class="muted" style="text-align:center">Kalkulator Belanja Dapur • Versi 2</p></div>
 <script>
-const $=id=>document.getElementById(id);
-let items=[];
-const rupiah=n=>new Intl.NumberFormat('id-ID',{style:'currency',currency:'IDR',maximumFractionDigits:0}).format(n||0);
-function render(){
- const root=$('items');
- if(!items.length){root.className='empty';root.textContent='Belum ada barang. Tambahkan barang pertama.'}
- else {root.className='';root.innerHTML='';items.forEach((it,i)=>{
-  const div=document.createElement('div');div.className='item';
-  const info=document.createElement('div');info.innerHTML='';
-  const strong=document.createElement('strong');strong.textContent=it.name;
-  const small=document.createElement('small');small.textContent=`${it.qty} × ${rupiah(it.price)} = ${rupiah(it.qty*it.price)}`;
-  info.append(strong,small);
-  const del=document.createElement('button');del.textContent='Hapus';del.setAttribute('aria-label','Hapus '+it.name);del.onclick=()=>{items.splice(i,1);render()};
-  div.append(info,del);root.append(div);
- })}
- const total=items.reduce((s,it)=>s+it.qty*it.price,0);
- $('total').textContent=rupiah(total);
- $('change').textContent=rupiah(Math.max(0,(Number($('paid').value)||0)-total));
-}
-$('add').onclick=()=>{
- const name=$('name').value.trim(),qty=Number($('qty').value),price=Number($('price').value);
- if(!name){alert('Isi nama barang terlebih dahulu.');$('name').focus();return}
- if(!(qty>0)||$('price').value===''||!(price>=0)){alert('Periksa jumlah dan harga barang.');return}
- items.push({name,qty,price});$('name').value='';$('qty').value='1';$('price').value='';render();$('name').focus();
-};
-$('paid').addEventListener('input',render);
-$('clear').onclick=()=>{if(items.length&&confirm('Hapus semua barang dari daftar?')){items=[];$('paid').value='';render()}};
-$('share').onclick=async()=>{
- if(!items.length){alert('Tambahkan barang sebelum membagikan struk.');return}
- const total=items.reduce((s,it)=>s+it.qty*it.price,0),paid=Number($('paid').value)||0;
- let text='🛒 STRUK BELANJA DAPUR\n\n'+items.map((it,i)=>`${i+1}. ${it.name}\n   ${it.qty} x ${rupiah(it.price)} = ${rupiah(it.qty*it.price)}`).join('\n')+
- '\n\nTOTAL: '+rupiah(total)+(paid?('\nDIBAYAR: '+rupiah(paid)+'\nKEMBALI: '+rupiah(Math.max(0,paid-total))):'')+'\n\nTerima kasih!';
- if(navigator.share){try{await navigator.share({title:'Struk Belanja Dapur',text})}catch(e){}}
- else {try{await navigator.clipboard.writeText(text);alert('Struk disalin. Tempelkan di WhatsApp.')}catch(e){prompt('Salin struk berikut:',text)}}
-};
-if('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js').catch(()=>{});
-render();
-</script>
-</body></html>
+const KEY='belanjaDapurV2',defaults={categories:['Bahan pokok','Sayuran','Buah','Daging dan ikan','Bumbu','Susu dan minuman','Kebersihan','Lainnya'],prices:[],transactions:[],incomes:[],budget:0,settings:{shop:'Dapur Utama',staff:''},cart:[]};
+let s;try{s={...defaults,...JSON.parse(localStorage.getItem(KEY)||'{}')}}catch(e){s={...defaults}}const $=id=>document.getElementById(id),rp=n=>new Intl.NumberFormat('id-ID',{style:'currency',currency:'IDR',maximumFractionDigits:0}).format(Number(n)||0),esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const spent=()=>s.transactions.reduce((a,t)=>a+t.total,0),income=()=>s.incomes.reduce((a,x)=>a+x.amount,0),saldo=()=>income()-spent(),cartTotal=()=>s.cart.reduce((a,x)=>a+x.qty*x.price,0);
+function persist(){localStorage.setItem(KEY,JSON.stringify(s));render()}
+function options(id){let el=$(id),old=el.value;el.innerHTML=s.categories.map(c=>`<option>${esc(c)}</option>`).join('');if(s.categories.includes(old))el.value=old}
+function go(p){document.querySelectorAll('.page').forEach(x=>x.classList.add('hidden'));$('p-'+p).classList.remove('hidden');document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.p===p));if(p==='belanja'&&!$('staff').value)$('staff').value=s.settings.staff||''}
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>go(b.dataset.p));
+function receipt(t){return `STRUK BELANJA ${s.settings.shop||'Dapur Utama'}\nTanggal: ${new Date(t.date).toLocaleString('id-ID')}\nPetugas: ${t.staff||'-'}\n\n${t.items.map((x,i)=>`${i+1}. ${x.name} — ${x.qty} ${x.unit} x ${rp(x.price)} = ${rp(x.qty*x.price)}`).join('\n')}\n\nTOTAL: ${rp(t.total)}\nSaldo sekarang: ${rp(saldo())}\nTerima kasih.`}
+async function share(text){if(navigator.share){try{await navigator.share({title:'Struk Belanja Dapur',text})}catch(e){}}else{location.href='https://wa.me/?text='+encodeURIComponent(text)}}
+function renderCart(){let el=$('cart');if(!s.cart.length){el.className='empty';el.textContent='Belum ada barang.'}else{el.className='';el.innerHTML=s.cart.map((x,i)=>`<div class="item"><div><strong>${esc(x.name)}</strong><small>${esc(x.category)} • ${x.qty} ${esc(x.unit)} × ${rp(x.price)} = ${rp(x.qty*x.price)}</small></div><button class="danger" data-rm="${i}">Hapus</button></div>`).join('');el.querySelectorAll('[data-rm]').forEach(b=>b.onclick=()=>{s.cart.splice(+b.dataset.rm,1);persist()})}$('ctotal').textContent=rp(cartTotal());$('change').textContent=rp(Math.max(0,(Number($('paid').value)||0)-cartTotal())}
+function render(){options('bc');options('pc');renderCart();$('cats').innerHTML=s.categories.map((c,i)=>`<div class="item"><strong>${esc(c)}</strong><button class="danger small" data-cat="${i}">Hapus</button></div>`).join('');$('cats').querySelectorAll('[data-cat]').forEach(b=>b.onclick=()=>{if(s.categories.length>1&&confirm('Hapus kategori ini?')){s.categories.splice(+b.dataset.cat,1);persist()}});$('prices').innerHTML=s.prices.length?s.prices.map((p,i)=>`<div class="item"><div><strong>${esc(p.name)}</strong><small>${esc(p.category)} • ${rp(p.price)}/${esc(p.unit)}</small></div><div class="actions"><button class="small" data-use="${i}">Pakai</button><button class="danger small" data-pdel="${i}">Hapus</button></div></div>`).join(''):'<div class="empty">Belum ada harga referensi.</div>';$('prices').querySelectorAll('[data-use]').forEach(b=>b.onclick=()=>{let p=s.prices[+b.dataset.use];$('bn').value=p.name;$('bp').value=p.price;$('bu').value=p.unit;$('bc').value=p.category;go('belanja')});$('prices').querySelectorAll('[data-pdel]').forEach(b=>b.onclick=()=>{s.prices.splice(+b.dataset.pdel,1);persist()});
+$('history').innerHTML=s.transactions.length?[...s.transactions].reverse().map(t=>`<div class="item"><div><strong>${esc(new Date(t.date).toLocaleString('id-ID'))}</strong><small>Petugas: ${esc(t.staff)} • ${t.items.length} barang</small><strong>${rp(t.total)}</strong></div><div class="actions"><button class="small" data-share="${t.id}">Bagikan</button><button class="danger small" data-tdel="${t.id}">Hapus</button></div></div>`).join(''):'<div class="empty">Belum ada transaksi.</div>';$('history').querySelectorAll('[data-share]').forEach(b=>b.onclick=()=>share(receipt(s.transactions.find(t=>t.id===b.dataset.share))));$('history').querySelectorAll('[data-tdel]').forEach(b=>b.onclick=()=>{if(confirm('Hapus transaksi? Saldo akan dihitung ulang.')){s.transactions=s.transactions.filter(t=>t.id!==b.dataset.tdel);persist()}});
+$('incomes').innerHTML=s.incomes.length?[...s.incomes].reverse().map(x=>`<div class="item"><div><strong>${rp(x.amount)}</strong><small>${esc(x.desc)} • ${esc(x.date)}</small></div><button class="danger small" data-idel="${x.id}">Hapus</button></div>`).join(''):'<div class="empty">Belum ada uang masuk.</div>';$('incomes').querySelectorAll('[data-idel]').forEach(b=>b.onclick=()=>{if(confirm('Hapus catatan uang masuk?')){s.incomes=s.incomes.filter(x=>x.id!==b.dataset.idel);persist()}});
+$('welcome').textContent='Unit: '+s.settings.shop+' • Petugas: '+(s.settings.staff||'belum diatur');$('saldo').textContent=rp(saldo());$('spent').textContent=rp(spent());$('left').textContent=s.budget?rp(s.budget-spent()):'Belum diatur';$('count').textContent=s.transactions.length;$('recent').innerHTML=s.transactions.length?[...s.transactions].reverse().slice(0,3).map(t=>`<div class="item"><div>${esc(new Date(t.date).toLocaleString('id-ID'))}<small>${esc(t.staff)}</small></div><strong>${rp(t.total)}</strong></div>`).join(''):'<div class="empty">Belum ada transaksi.</div>';
+$('budget').value=s.budget||'';$('btotal').textContent=s.budget?rp(s.budget):'Belum diatur';$('bused').textContent=rp(spent());$('bleft').textContent=s.budget?rp(s.budget-spent()):'—';$('bnote').textContent=!s.budget?'Masukkan anggaran untuk memantau pengeluaran.':spent()>s.budget?'Anggaran terlampaui.':'Anggaran masih tersedia.';$('shop').value=s.settings.shop||'';$('defaultStaff').value=s.settings.staff||''}
+$('add').onclick=()=>{let name=$('bn').value.trim(),qty=Number($('bq').value),price=Number($('bp').value);if(!name)return alert('Isi nama barang.');if(!(qty>0)||$('bp').value===''||price<0)return alert('Periksa jumlah dan harga.');s.cart.push({name,qty,price,unit:$('bu').value,category:$('bc').value||'Lainnya'});$('bn').value='';$('bq').value=1;$('bp').value='';persist()};
+$('paid').oninput=()=>{$('change').textContent=rp(Math.max(0,(Number($('paid').value)||0)-cartTotal()))};
+$('saveTx').onclick=()=>{if(!s.cart.length)return alert('Tambahkan barang dahulu.');if(cartTotal()>saldo()&&!confirm('Belanja melebihi saldo tercatat. Tetap simpan?'))return;s.transactions.push({id:String(Date.now()),date:new Date().toISOString(),staff:$('staff').value.trim()||s.settings.staff||'-',items:s.cart.map(x=>({...x})),total:cartTotal()});s.cart=[];$('paid').value='';persist();alert('Transaksi tersimpan.');go('riwayat')};
+$('shareCart').onclick=()=>{if(!s.cart.length)return alert('Tambahkan barang dahulu.');share(receipt({date:new Date().toISOString(),staff:$('staff').value.trim()||s.settings.staff||'-',items:s.cart,total:cartTotal()}))};
+$('addcat').onclick=()=>{let c=$('newcat').value.trim();if(!c)return alert('Isi nama kategori.');if(s.categories.some(x=>x.toLowerCase()===c.toLowerCase()))return alert('Kategori sudah ada.');s.categories.push(c);$('newcat').value='';persist()};
+$('savePrice').onclick=()=>{let name=$('pn').value.trim(),price=Number($('pp').value);if(!name||$('pp').value===''||price<0)return alert('Isi nama dan harga.');s.prices.push({name,price,unit:$('pu').value,category:$('pc').value||'Lainnya'});$('pn').value='';$('pp').value='';persist();alert('Harga disimpan.')};
+$('saveBudget').onclick=()=>{let v=Number($('budget').value);if($('budget').value===''||v<0)return alert('Masukkan anggaran.');s.budget=v;persist();alert('Anggaran disimpan.')};
+$('idate').value=new Date().toISOString().slice(0,10);$('addIncome').onclick=()=>{let amount=Number($('iamt').value);if(!(amount>0))return alert('Masukkan uang masuk lebih dari nol.');s.incomes.push({id:String(Date.now()),amount,desc:$('idesc').value.trim()||'Uang masuk',date:$('idate').value||new Date().toISOString().slice(0,10)});$('iamt').value='';$('idesc').value='';persist();alert('Uang masuk dicatat.')};
+$('settingsSave').onclick=()=>{s.settings.shop=$('shop').value.trim()||'Dapur Utama';s.settings.staff=$('defaultStaff').value.trim();persist();alert('Pengaturan disimpan.')};
+function download(name,data,type){let u=URL.createObjectURL(new Blob([data],{type})),a=document.createElement('a');a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),1200)}
+$('export').onclick=()=>download('riwayat-belanja.txt',s.transactions.map(receipt).join('\n\n----------------\n\n')||'Belum ada transaksi.','text/plain;charset=utf-8');$('backup').onclick=()=>download('cadangan-belanja-dapur.json',JSON.stringify(s,null,2),'application/json');
+$('restore').onchange=async e=>{try{let x=JSON.parse(await e.target.files[0].text());if(!x.categories||!x.transactions||!x.incomes)throw 0;if(confirm('Pulihkan cadangan dan ganti data sekarang?')){s={...defaults,...x};persist();alert('Cadangan dipulihkan.')}}catch(err){alert('File cadangan tidak valid.')}e.target.value=''};
+$('reset').onclick=()=>{if(confirm('Hapus semua data aplikasi? Tindakan ini tidak dapat dibatalkan.')){s={...defaults,settings:{...defaults.settings}};persist();alert('Data dihapus.')}};render();
+</script></body></html>
