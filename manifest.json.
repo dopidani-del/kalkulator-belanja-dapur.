@@ -1,0 +1,14 @@
+
+{
+  "id": "/kalkulator-belanja-dapur./",
+  "name": "Kalkulator Belanja Dapur",
+  "short_name": "Belanja Dapur",
+  "description": "Aplikasi untuk mencatat belanja dapur, anggaran, uang masuk, saldo, dan riwayat transaksi.",
+  "lang": "id-ID",
+  "start_url": "/kalkulator-belanja-dapur./",
+  "scope": "/kalkulator-belanja-dapur./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#15803d",
+  "background_color": "#f0fdf4"
+}
